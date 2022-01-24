@@ -1,0 +1,9 @@
+---
+deployment:
+  tasks:
+    - export DEPLOYPATH=/home/anthonyc/public_html/
+    - npm install
+    - npm run build
+    - /bin/cp dist/server/bundle.js $DEPLOYPATH
+    - npm install
+    - npm run serve

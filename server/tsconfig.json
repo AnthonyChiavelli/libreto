@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "outDir": "../dist/server",
+    "noImplicitAny": true,
+    "rootDir": "./src",
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "baseUrl": "./src",
+    "target": "es6",
+    "jsx": "react",
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "lib": ["es5", "es6"]
+  }
+}
