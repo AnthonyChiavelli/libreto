@@ -1,27 +1,15 @@
 import axios, { AxiosResponse } from 'axios'
-import { IBlogPost } from 'model'
+import { WordResult } from 'types/spanishdict'
+import { SavedWord } from 'types/types'
 
 export default {
-  getBlogPosts(status: 'published' | 'draft' | 'all', category?: string): Promise<AxiosResponse<IBlogPost[]>> {
-    let url = `/api/posts/?status=${status}`
-    if (category) url += `&category=${category}`
-    console.log("get")
-    console.log(category)
-    console.log(url)
-    return axios.get(url)
+  lookupWord(word: string): Promise<AxiosResponse<WordResult[]>> {
+    return axios.post('/api/lookup-word', { word })
   },
-  getBlogPost(id: string): Promise<AxiosResponse<IBlogPost>> {
-    return axios.get(`/api/posts/${id}`)
+  fetchWordbank(): Promise<AxiosResponse<SavedWord[]>> {
+    return axios.get('/api/wordbank')
   },
-  updateBlogPost(id: string, data: Partial<IBlogPost>): Promise<AxiosResponse<IBlogPost>> {
-    return axios.patch(`/api/posts/${String(id)}`, data)
-  },
-  createBlogPost(data: Partial<IBlogPost>): Promise<AxiosResponse<IBlogPost>> {
-    return axios.post(`/api/posts/`, data)
-  },
-  getAdminStatus(token: string): Promise<AxiosResponse<{ isAdmin: boolean }>> {
-    return axios.get(`/api/adminStatus/?token=${token}`)
+  addWord(word: string, definitions: WordResult[], notes: string): Promise<AxiosResponse> {
+    return axios.post('/api/wordbank', { word, definitions, notes })
   },
 }
-
-// TODO set up circle CI

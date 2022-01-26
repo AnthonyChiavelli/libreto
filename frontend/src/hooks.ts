@@ -1,27 +1,5 @@
-import Api from 'api'
-import React from 'react'
-import { getLocalStorageValue, setLocalStorageValue } from 'utils'
+import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux'
+import type { AppDispatch, RootState } from 'store'
 
-export function useLocalStorage(key: string): [any, (val: any) => void] {
-  const [value, setValue] = React.useState<any>(getLocalStorageValue(key))
-  const firstRun = React.useRef(true)
-  React.useEffect(() => {
-    if (!firstRun) {
-      setLocalStorageValue(key, value)
-    }
-    firstRun.current = false
-  }, [key, value])
-
-  return [value, setValue]
-}
-
-export function useAdminStatus(): boolean {
-  const [userToken] = useLocalStorage('userToken')
-  const [isAdmin, setIsAdmin] = React.useState<boolean>(false)
-  React.useEffect(() => {
-    Api.getAdminStatus(userToken).then((res) => {
-      setIsAdmin(res.data.isAdmin)
-    })
-  }, [])
-  return isAdmin
-}
+export const useAppDispatch = (): any => useDispatch<AppDispatch>()
+export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector

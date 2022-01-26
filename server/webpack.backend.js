@@ -4,7 +4,6 @@ const server = {
   target: 'node',
   mode: 'production',
   entry: './src/main.ts',
-  // watch: true,
   module: {
     rules: [
       {
