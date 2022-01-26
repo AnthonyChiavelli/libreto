@@ -41,12 +41,13 @@ export default function (): JSX.Element {
   }, [])
 
   return (
-    <Box sx={{ backgroundColor: '#7681B3' }}>
+    <Box sx={{ backgroundColor: '#7681B3', overflow: 'none' }}>
       <Drawer
         anchor="left"
         variant="permanent"
         sx={{
           backgroundColor: '#ADA8B6',
+          overflow: 'hidden',
           width: drawerWidth,
           flexShrink: 0,
           '& .MuiDrawer-paper': {
@@ -59,7 +60,7 @@ export default function (): JSX.Element {
           Word Bank
         </Typography>
         <Divider />
-        <List>
+        <List sx={{overflowY: "auto"}}>
           {loading ? (
             <Box sx={{ display: 'flex', justifyContent: 'center' }}>
               <CircularProgress />
